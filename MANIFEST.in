@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include tobientrading_custom *.css
+recursive-include tobientrading_custom *.csv
+recursive-include tobientrading_custom *.html
+recursive-include tobientrading_custom *.ico
+recursive-include tobientrading_custom *.js
+recursive-include tobientrading_custom *.json
+recursive-include tobientrading_custom *.md
+recursive-include tobientrading_custom *.png
+recursive-include tobientrading_custom *.py
+recursive-include tobientrading_custom *.svg
+recursive-include tobientrading_custom *.txt
+recursive-exclude tobientrading_custom *.pyc
