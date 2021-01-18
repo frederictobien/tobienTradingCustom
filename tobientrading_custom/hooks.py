@@ -127,3 +127,9 @@ app_license = "MIT"
 # 	"Task": "tobientrading_custom.task.get_dashboard_data"
 # }
 
+fixtures = [{
+    'doctype': 'Print Format',
+    'filters': [['name', 'in', [
+        "Lot Print Format"
+    ]]]
+}]

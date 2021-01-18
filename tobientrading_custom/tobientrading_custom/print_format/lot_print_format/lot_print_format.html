@@ -7,39 +7,61 @@
     <style>
         .print-format td{
             padding: 4px !important;
-        },
+        }
          .font_all {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 7pt
+            font-size: 10pt;
         }
+        .main{
+            margin: 0 auto;
+            border: 2px solid #ddd;
+            width: 50%;
+            height: 15%;
+            padding: 20px !important;
+        }
+        @media print {
+         .main{
+             margin: 0 auto;
+             border: 2px solid #ddd;
+             width: 54mm !important;
+             height: 28mm !important;
+             padding: 2px 5px !important;
+         }
+        .font_all{
+            font-size: 6pt;
+        }
+        #tobien_trading_logo{
+            max-width: 50% !important;
+            max-height: 50% !important;
+        }
+      }
     </style>
 </head>
 <body>
-    <table style="width: 70%; border-top: 2px solid #ddd; border-left: 2px solid #ddd; border-right: 2px solid #ddd; margin-top: 10px">
-        <tr>
-            <td>
-              <img src="assets/tobientrading_custom/img/logo_toobien.png" style="max-width: 30% !important; max-height: 30% !important; margin-top: 1%; margin-left: 1%;" id="onourway_logo">
-            </td>
-        </tr>
-    </table>
-    <table style="width: 70%; border-bottom: 2px solid #ddd; border-left: 2px solid #ddd; border-right: 2px solid #ddd; margin-top: 1px">
-        <tr>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;"><strong>Sample Lot</strong></td>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.name}}</td>
-        </tr>
-        <tr>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;"><strong>Item Code</strong></td>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.item}}</td>
-        </tr>
-        <tr>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;"><strong>Item Name</strong></td>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.item_name}}</td>
-        </tr>
-        <tr>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;"><strong>Date</strong></td>
-            <td class="font_all" style="width: 10%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.depleated_on}}</td>
-        </tr>
+    <div class="main">
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                  <img src="assets/tobientrading_custom/img/logo_toobien.png" style="max-width: 50% !important; max-height: 55% !important;" id="tobien_trading_logo">
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <tr>
+                <td class="font_all" style="width: 80%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.item}}</td>
+            </tr>
+            <tr>
+                <td class="font_all" style="width: 80%; padding-top: 1px !important; padding-bottom: 1px !important; font-weight: bold">{{doc.item_name}}</td>
 
-    </table>
+            </tr>
+            <tr>
+                <td class="font_all" style="width: 80%; padding-top: 1px !important; padding-bottom: 1px !important;">Food Grade Lot {{doc.name}}</td>
+            </tr>
+            <tr>
+                <td class="font_all" style="width: 80%; padding-top: 1px !important; padding-bottom: 1px !important;">Date: {{doc.depleated_on}} Tobien Trading GmbH</td>
+            </tr>
+
+        </table>
+    </div>
 </body>
 </html>
