@@ -5,36 +5,71 @@
     <title>Lot Print Format</title>
 
     <style>
-        .print-format td{
-            padding: 4px !important;
-        }
-         .font_all {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10pt;
-        }
-        .main{
+
+        .print-format table, .print-format tr,
+	.print-format td, .print-format div, .print-format p {
+		font-family: Arial, Helvetica, sans-serif;
+		/*line-height: 100%;*/
+		vertical-align: middle;
+	}
+	@media screen {
+		.print-format {
             margin: 0 auto;
-            border: 2px solid #ddd;
-            width: 50%;
-            height: 15%;
-            padding: 20px !important;
-        }
-        @media print {
-         .main{
+			width: 50mm !important;;
+			padding: 2px 5px !important;
+			min-height: 28mm !important;;
+		}
+        .main{
              margin: 0 auto;
              border: 2px solid #ddd;
-             width: 50mm !important;
+             width: 48mm !important;
              height: 28mm !important;
              padding: 2px 5px !important;
          }
+
         .font_all{
             font-size: 6pt;
         }
+
         #tobien_trading_logo{
             max-width: 50% !important;
             max-height: 50% !important;
         }
-      }
+	}
+
+
+
+
+        /*.print-format td{*/
+            /*padding: 4px !important;*/
+        /*}*/
+         .font_all {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 6pt;
+        }
+        /*.main{*/
+            /*margin: 0 auto;*/
+            /*border: 2px solid #ddd;*/
+            /*width: 50%;*/
+            /*height: 15%;*/
+            /*padding: 20px !important;*/
+        /*}*/
+        /*@media print {*/
+         /*.main{*/
+             /*margin: 0 auto;*/
+             /*border: 2px solid #ddd;*/
+             /*width: 50mm !important;*/
+             /*height: 28mm !important;*/
+             /*padding: 2px 5px !important;*/
+         /*}*/
+        /*.font_all{*/
+            /*font-size: 6pt;*/
+        /*}*/
+        /*#tobien_trading_logo{*/
+            /*max-width: 50% !important;*/
+            /*max-height: 50% !important;*/
+        /*}*/
+      /*}*/
     </style>
 </head>
 <body>
