@@ -6,82 +6,48 @@
 
     <style>
 
-        .print-format table, .print-format tr,
-	.print-format td, .print-format div, .print-format p {
-		font-family: Arial, Helvetica, sans-serif;
-		/*line-height: 100%;*/
-		vertical-align: middle;
-	}
-	@media screen {
-		.print-format {
-            margin: 0 auto;
-			width: 50mm !important;;
-			padding: 2px 5px !important;
-			min-height: 28mm !important;;
-		}
         .main{
-             margin: 0 auto;
-             border: 2px solid #ddd;
-             width: 48mm !important;
-             height: 28mm !important;
-             padding: 2px 5px !important;
-         }
-
-        .font_all{
+            width: 50mm;
+            height: 28mm;
+            float: left;
+            /*border-bottom-style: dashed;*/
+            text-align:left;
+            padding: 5px;
+            page-break-inside: avoid;
+            font-family: Arial, Helvetica, sans-serif;
             font-size: 6pt;
+            }
+
+        .logo_border {
+            border-top: 2px solid #ddd;
+            border-left: 2px solid #ddd;
+            border-right: 2px solid #ddd;
+        }
+
+        .content_border {
+            border-bottom: 2px solid #ddd;
+            border-left: 2px solid #ddd;
+            border-right: 2px solid #ddd;
         }
 
         #tobien_trading_logo{
             max-width: 50% !important;
             max-height: 50% !important;
         }
-	}
 
-
-
-
-        /*.print-format td{*/
-            /*padding: 4px !important;*/
-        /*}*/
-         .font_all {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 6pt;
-        }
-        /*.main{*/
-            /*margin: 0 auto;*/
-            /*border: 2px solid #ddd;*/
-            /*width: 50%;*/
-            /*height: 15%;*/
-            /*padding: 20px !important;*/
-        /*}*/
-        /*@media print {*/
-         /*.main{*/
-             /*margin: 0 auto;*/
-             /*border: 2px solid #ddd;*/
-             /*width: 50mm !important;*/
-             /*height: 28mm !important;*/
-             /*padding: 2px 5px !important;*/
-         /*}*/
-        /*.font_all{*/
-            /*font-size: 6pt;*/
-        /*}*/
-        /*#tobien_trading_logo{*/
-            /*max-width: 50% !important;*/
-            /*max-height: 50% !important;*/
-        /*}*/
-      /*}*/
     </style>
 </head>
 <body>
     <div class="main">
-        <table style="width: 100%;">
+        <table class="logo_border" style="width: 100%;">
             <tr>
                 <td>
                   <img src="assets/tobientrading_custom/img/logo_toobien.png" style="max-width: 50% !important; max-height: 55% !important;" id="tobien_trading_logo">
                 </td>
             </tr>
         </table>
-        <table style="width: 100%;">
+        <table class="content_border" style="
+        width: 100%;">
             <tr>
                 <td class="font_all" style="width: 80%; padding-top: 1px !important; padding-bottom: 1px !important;">{{doc.item}}</td>
             </tr>
