@@ -5,7 +5,7 @@ frappe.ui.form.on('Sample Lot Letter', {
 	customer: function(frm) {
 
 	    frappe.call({
-                method:"tobientrading_custom.tobientrading_custom.doctype.sample_lot_letter.sample_lot_letter.auto_fetch",
+                method: "tobientrading_custom.tobientrading_custom.doctype.sample_lot_letter.sample_lot_letter.auto_fetch",
                 args:{"customer":frm.doc.customer},
                 callback:function(r){
                     var data = r.message[0]
