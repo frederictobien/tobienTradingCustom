@@ -17,6 +17,37 @@ frappe.ui.form.on('Sample Lot Letter', {
                 }
             });
 
+
+	    frm.set_query('customer_adress', function(doc) {
+			return {
+				query: 'frappe.contacts.doctype.address.address.address_query',
+				filters: {
+					link_doctype: "Customer",
+					link_name: doc.customer
+				}
+			};
+		});
+
+	    frm.set_query('shipping_address_name', function(doc) {
+			return {
+				query: 'frappe.contacts.doctype.address.address.address_query',
+				filters: {
+					link_doctype: "Customer",
+					link_name: doc.customer
+				}
+			};
+		});
+
+	    frm.set_query('contact_person', function(doc) {
+			return {
+				query: 'frappe.contacts.doctype.contact.contact.contact_query',
+				filters: {
+					link_doctype: "Customer",
+					link_name: doc.customer
+				}
+			};
+		});
+
 	},
 
     vat: function(frm) {
