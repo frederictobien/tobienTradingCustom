@@ -20,9 +20,8 @@ def auto_fetch(customer):
                               {"link_doctype": "Customer","parenttype": "Address","link_name": customer}, ["parent"])
 
     for i in address:
-        print (i)
         address_type = frappe.db.get_value('Address', {"name": i["parent"]}, "address_type")
-        if address_type == "Shipping":
+        if address_type == "Shipping" or address_type == "Warehouse":
             address_name_shipping = i["parent"]
         elif address_type == "Billing":
             address_name_billing = i["parent"]
@@ -33,6 +32,6 @@ def auto_fetch(customer):
                                        {"link_doctype": "Customer", "parenttype": "Contact", "link_name": customer},
                                        ["parent"])
 
-    data.append({"address_shipping": address_name_shipping if address_name_shipping else " ", "contact": contact, "address_billing": address_name_billing if address_name_billing else " "})
+    data.append({"address_shipping": address_name_shipping if address_name_shipping else None, "contact": contact, "address_billing": address_name_billing if address_name_billing else None})
 
     return data
