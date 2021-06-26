@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "allow_import": 1,
  "autoname": "naming_series:",
  "creation": "2021-01-19 14:27:03.589124",
@@ -22,6 +23,7 @@
   "contact_person",
   "column_break_14",
   "shipping_address_name",
+  "eori_no",
   "contact_section",
   "items_section",
   "sample_lot_table",
@@ -355,14 +357,21 @@
    "options": "Sample Lot Letter",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "eori_no",
+   "fieldtype": "Data",
+   "label": "EORI No"
   }
  ],
+ "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "modified": "2021-02-02 17:40:22.578992",
+ "links": [],
+ "modified": "2021-06-26 09:13:07.728405",
  "modified_by": "Administrator",
  "module": "Tobientrading Custom",
  "name": "Sample Lot Letter",
- "owner": "ft@tobien-trading.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "amend": 1,

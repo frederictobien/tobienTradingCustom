@@ -13,6 +13,7 @@ frappe.ui.form.on('Sample Lot Letter', {
                     frm.set_value("customer_adress", data["address_billing"])
                     frm.set_value("shipping_address_name", (data["address_shipping"]) ? data["address_shipping"] : data["address_billing"])
                     frm.set_value("contact_person", data["contact"])
+                    frm.set_value("eori_no", data["eori_no"])
                 }
             });
 
