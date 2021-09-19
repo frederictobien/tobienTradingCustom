@@ -1,5 +1,17 @@
 
 frappe.ui.form.on('Blanket Order', {
+    refresh: function(frm) {
+			frappe.call({
+            method: "tobientrading_custom.api.blanket_order.get_taxes_template", //dotted path to server method
+            callback: function(r) {
+                // code snippet
+                if (r.message){
+                    set_field_options("taxes_and_charges", r.message)
+
+                }
+            }
+        })
+	},
 	shipping_address_name: function(frm) {
 		// your code here
 		if (frm.doc.shipping_address_name){
@@ -49,42 +61,108 @@ frappe.ui.form.on('Blanket Order', {
 	},
 	taxes_and_charges: function(frm) {
 		if(frm.doc.taxes_and_charges) {
-			return frm.call({
-				method: "erpnext.controllers.accounts_controller.get_taxes_and_charges",
-				args: {
-					"master_doctype": frappe.meta.get_docfield(frm.doc.doctype, "taxes_and_charges",
-						frm.doc.name).options,
-					"master_name": frm.doc.taxes_and_charges
-				},
-				callback: function(r) {
-					if(!r.exc) {
-						if(frm.doc.shipping_rule && frm.doc.taxes) {
-							for (let tax of r.message) {
-								frm.add_child("taxes", tax);
-							}
 
-							refresh_field("taxes");
-						} else {
-							frm.set_value("taxes", r.message);
-							console.log(r.message)
-				// 			frm.cscript.calculate_taxes_and_totals()
-						}
-					}
-				}
-			});
+		    frappe.call({
+                method: "frappe.client.get_value",
+                args: {
+                  doctype: "Purchase Taxes and Charges Template",
+                  filters: { name: frm.doc.taxes_and_charges },
+                  fieldname: "name",
+                },
+                callback: function (r) {
+                  if (r.message.name) {
+                    let master_doctype = "Purchase Taxes and Charges Template"
+                    return frm.call({
+        				method: "erpnext.controllers.accounts_controller.get_taxes_and_charges",
+        				args: {
+        					"master_doctype": master_doctype,
+        					"master_name": frm.doc.taxes_and_charges
+        				},
+        				callback: function(r) {
+        					if(!r.exc) {
+        						if(frm.doc.shipping_rule && frm.doc.taxes) {
+        							for (let tax of r.message) {
+        								frm.add_child("taxes", tax);
+        							}
+
+        							refresh_field("taxes");
+        						} else {
+        							frm.set_value("taxes", r.message);
+        				// 			frm.cscript.calculate_taxes_and_totals()
+        						}
+        					}
+        				}
+        			});
+                  }
+                  else{
+                      let master_doctype = "Sales Taxes and Charges Template"
+                      return frm.call({
+        				method: "erpnext.controllers.accounts_controller.get_taxes_and_charges",
+        				args: {
+        					"master_doctype": master_doctype,
+        					"master_name": frm.doc.taxes_and_charges
+        				},
+        				callback: function(r) {
+        					if(!r.exc) {
+        						if(frm.doc.shipping_rule && frm.doc.taxes) {
+        							for (let tax of r.message) {
+        								frm.add_child("taxes", tax);
+        							}
+
+        							refresh_field("taxes");
+        						} else {
+        							frm.set_value("taxes", r.message);
+        				// 			frm.cscript.calculate_taxes_and_totals()
+        						}
+        					}
+        				}
+        			});
+                  }
+                },
+              });
 		}
 	},
+	currency: function(frm) {
+		if(frm.doc.items.length > 0) {
+			frm.refresh();
+		}
+	}
 })
 
 frappe.ui.form.on('Blanket Order Item', {
 	rate: function(frm, cdt, cdn) {
 		var d = locals[cdt][cdn];
 		if(d.rate) {
+			var total = d.qty * d.rate
+			frappe.model.set_value(
+              cdt,
+              cdn,
+              "total_amount",
+              total
+            );
+
+		}
+	},
+	qty: function(frm, cdt, cdn) {
+		var d = locals[cdt][cdn];
+		if(d.rate) {
+			var total = d.qty * d.rate
+			frappe.model.set_value(
+              cdt,
+              cdn,
+              "total_amount",
+              total
+            );
+
+		}
+	},
+	total_amount: function(frm, cdt, cdn) {
+		var d = locals[cdt][cdn];
+		if(d.total_amount) {
 			var total = 0
 			for (var i=0; i < cur_frm.doc.items.length;i++){
-		        total += parseFloat(cur_frm.doc.items[i].rate);
+		        total += parseFloat(cur_frm.doc.items[i].total_amount);
 		    }
-		    console.log(total)
 		    cur_frm.set_value("total", total)
 		    cur_frm.set_value("net_total", total)
 		    cur_frm.set_value("grand_total", total)
@@ -92,13 +170,7 @@ frappe.ui.form.on('Blanket Order Item', {
 		    cur_frm.set_value("base_total", total)
 		    cur_frm.set_value("base_net_total", total)
 		    cur_frm.set_value("base_grand_total", total)
-		    cur_frm.refresh_fields("total");
-		    cur_frm.refresh_fields("net_total");
-		    cur_frm.refresh_fields("grand_total");
-		    cur_frm.refresh_fields("rounded_total");
-		    cur_frm.refresh_fields("base_total");
-		    cur_frm.refresh_fields("base_net_total");
-		    cur_frm.refresh_fields("base_grand_total");
+		    frm.refresh();
 		}
 	},
 	item_code: function(frm, cdt, cdn) {
