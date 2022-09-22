@@ -21,6 +21,8 @@ def auto_fetch(customer):
     address = frappe.db.get_list('Dynamic Link',
                               {"link_doctype": "Customer","parenttype": "Address","link_name": customer}, ["parent"])
 
+
+
     for i in address:
         address_type = frappe.db.get_value('Address', {"name": i["parent"]}, ["address_type", "eori_no"], as_dict=1)
         if address_type['address_type'] == "Shipping" or address_type == "Warehouse":
@@ -31,6 +33,7 @@ def auto_fetch(customer):
             eori_billing = address_type['eori_no']
         else:
             pass
+
 
     contact = frappe.db.get_value('Dynamic Link',
                                        {"link_doctype": "Customer", "parenttype": "Contact", "link_name": customer},
