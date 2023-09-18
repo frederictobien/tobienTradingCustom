@@ -9,7 +9,7 @@ frappe.ui.form.on("Opportunity", {
 
 function render_activities_and_comments(frm) {
     frappe.call({
-        method: "tobientrading_custom.tobientrading_custom.py.opportunity.get_activities_and_comments",
+        method: "tobientrading_custom.tobientrading_custom.opportunity.get_activities_and_comments",
         args: {
             ref_docname: frm.doc.name
         },
