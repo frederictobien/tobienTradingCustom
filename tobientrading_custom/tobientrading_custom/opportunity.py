@@ -7,13 +7,13 @@ import frappe
 
 @frappe.whitelist()
 def get_activities_and_comments(ref_docname):
-    activities = get_activities_and_comments(ref_docname)
+    activities = get_activities(ref_docname)
     
     html = frappe.render_template("tobientrading_custom/templates/activities_and_comments_template.html", {'activities': activities})
     
     return {"html": html, "activities": activities}
 
-def get_activities_and_comments(opportunity):
+def get_activities(opportunity):
     sql_query = """
         SELECT * 
         FROM (
