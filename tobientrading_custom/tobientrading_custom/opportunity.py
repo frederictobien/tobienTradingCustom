@@ -18,7 +18,7 @@ def get_activities(opportunity):
         SELECT * 
         FROM (
             SELECT
-                "Event" AS `type", 
+                "Event" AS `type`, 
                 `tabEvent`.`name` AS `name`,
                 `tabEvent`.`subject` AS `subject`,
                 `tabEvent`.`event_category` AS `event_category`,
@@ -34,7 +34,7 @@ def get_activities(opportunity):
               AND  `tabEvent Participants`.`reference_docname` = '{opportunity}' 
               AND  `tabEvent`.`status` ='Open' 
             UNION SELECT 
-                "Comment" AS `type", 
+                "Comment" AS `type`, 
                 `tabComment`.`name` AS `name`,
                 "" AS `subject`,
                 NULL AS `event_category`,
@@ -49,7 +49,7 @@ def get_activities(opportunity):
               AND  `tabComment`.`comment_type` = 'Comment' 
               AND  `tabComment`.`reference_name` = '{opportunity}'
             UNION SELECT 
-                "Note" AS `type", 
+                "Note" AS `type`, 
                 `tabCRM Note`.`name` AS `name`,
                 "" AS `subject`,
                 NULL AS `event_category`,
