@@ -1,0 +1,135 @@
+<div class="open-activities">
+	<div class="section-body">
+		<div class="open-activities pr-1">
+			<div class="open-section-head">
+				<span class="ml-2">{{ _("Activities and Comments") }}</span>
+			</div>
+			{% if activities %}
+				{% for actv in activities %}
+					{% if actv.event_category != "Event" %}
+						<div class="single-activity">
+							<div class="text-muted ml-1 " >
+								{% if actv.creation %}
+									{{frappe.utils.get_datetime(actv.creation).strftime('%d.%m.%Y %H:%M')}}<br>
+								{% endif %}
+								{% if actv.employee_name %}
+									{{ actv.employee_name }}
+								{% endif %}
+							</div>
+							
+							<div class="flex justify-between mb-2">
+								<div class="row label-area font-md ml-1">
+									<span class="mr-2">
+										<svg class="icon icon-sm">
+											<use href="#icon-small-message"></use>
+										</svg>
+									</span>
+									<div title="{{ _('Comment') }}">
+										{{ actv.content }}
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					{% else %}
+						
+						<div class="single-activity">
+							<div class="text-muted ml-1">
+								{% if actv.creation %}
+									{{frappe.utils.get_datetime(actv.creation).strftime('%d.%m.%Y %H:%M')}}
+								{% endif %}
+							</div>
+							<div class="flex justify-between mb-2">
+								<div class="row label-area font-md ml-1 title">
+									<span class="mr-2">
+										<svg class="icon icon-sm">
+											<use href="#icon-{{ 'calendar' }}"></use>
+										</svg>
+									</span>
+									<a href="/app/event/{{ actv.name }}" title="{{ _('Open Event') }}">
+										{{ actv.subject }} <br>
+										
+										{{frappe.utils.get_datetime(actv.starts_on).strftime('%d.%m.%Y %H:%M')}}
+
+										{% if actv.ends_on and actv.starts_on != actv.ends_on %} 
+											
+												-
+												{{frappe.utils.get_datetime(actv.ends_on).strftime('%d.%m.%Y %H:%M')}}
+
+										{% endif %}
+									</a>
+								</div>
+							</div>
+							
+						</div>
+					{% endif %}
+				{% endfor %}
+            {% else %}
+            <div class="single-activity no-activity text-muted">
+                {{ _("No Activities") }}
+            </div>
+		    {% endif %}
+		</div>
+	</div>
+</div>
+
+
+<style>
+.open-activities {
+	min-height: 50px;
+	padding-left: 0px;
+	padding-bottom: 15px !important;
+}
+
+.open-activities .new-btn {
+	text-align: right;
+}
+
+.single-activity {
+	display:flex;
+	min-height: 60px !important;
+	border: 1px solid var(--border-color);
+	padding: 10px;
+	border-bottom: 0;
+	padding-right: 0;
+}
+
+.single-activity:last-child {
+	border-bottom: 1px solid var(--border-color);
+}
+
+.single-activity:hover .completion-checkbox{
+	display: block;
+}
+
+.open-activities {
+	width: 100%;
+}
+
+.open-activities:first-child {
+	border-right: 0;
+}
+
+.text-muted {
+	width: 21%;
+	text-align: right;
+	margin-right: 7px;
+}
+
+.open-section-head {
+	background-color: var(--bg-color);
+	min-height: 30px;
+	border-bottom: 1px solid var(--border-color);
+	padding: 10px;
+	font-weight: bold;
+}
+
+.no-activity {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.form-footer {
+	background-color: var(--bg-color);
+}
+</style>
