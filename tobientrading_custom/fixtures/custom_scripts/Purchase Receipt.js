@@ -8,5 +8,16 @@ frappe.ui.form.on("Purchase Receipt", {
             });
 
         }
+    },
+    refresh: function(frm) {
+        setTimeout(function() {
+            cur_frm.fields_dict.shipping_address.get_query = function(doc) {
+                return {
+                    filters: {
+                        'is_shipping_address': 1
+                    }
+                };
+            };
+        }, 1000);
     }
-})
+});
